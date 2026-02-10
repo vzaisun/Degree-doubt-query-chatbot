@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>UCSD HDSI Chatbot</title>
+</head>
+<body>
+<h2>UCSD HDSI MS Chatbot</h2>
+
+<textarea id="q" rows="4" cols="50"></textarea><br>
+<button onclick="ask()">Ask</button>
+
+<p id="a"></p>
+
+<script>
+async function ask() {
+  const q = document.getElementById("q").value;
+  const res = await fetch("/chat", {
+    method: "POST",
+    headers: {"Content-Type":"application/json"},
+    body: JSON.stringify({question: q})
+  });
+  const data = await res.json();
+  document.getElementById("a").innerText = data.answer;
+}
+</script>
+</body>
+</html>
